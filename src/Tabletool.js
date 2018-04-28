@@ -52,37 +52,52 @@ class Tabletool extends Component {
 					</select>
 				);
 			}.bind(this));
-			var newSelectList = [0].map(function(node) {
+
+			if(!this.isConsequent()){
+				var newSelectList = [0].map(function(node) {
 				var selectId = "select" + this.state.selectedNodes.length;
-				return (
-					<select id={selectId} onChange={this.onSelectChange} class="col-md-3 col-sm-3 col-xs-3 pl-sm-0 pr-sm-0 selectpicker">
-						<option disabled="disabled" selected="selected">Select an option.</option>
-						{this.getOptionList(this.state.selectedNodes.length)}
-					</select>
-				);
-			}.bind(this));
-			selectList = selectList.concat(newSelectList);
+					return (
+						<select id={selectId} onChange={this.onSelectChange} class="col-md-3 col-sm-3 col-xs-3 pl-sm-0 pr-sm-0 selectpicker">
+							<option disabled="disabled" selected="selected">Select an option.</option>
+							{this.getOptionList(this.state.selectedNodes.length)}
+						</select>
+					);
+				}.bind(this));
+				selectList = selectList.concat(newSelectList)
+			}
+
 			return selectList;
 		}
+	}
+
+	isConsequent(){
+		var allSelectNodes = this.state.selectedNodes;
+		var nodes = this.props.data.children;
+		for(var tierIndex=0;tierIndex<allSelectNodes.length;tierIndex++){
+			var nodeIndex = allSelectNodes[tierIndex];
+			nodes = nodes[nodeIndex].children;
+		}
+		if(!nodes){return true;}
+		return false;
 	}
 
 	getOptionList(tier){
 		var parentList = this.props.data.children;
 		
 
-		var parentNodeName = null;
+		var parentNodeNumber = 0;
 		for(var i=0;i<tier;i++){
-			parentNodeName = this.state.selectedNodes[i];
-			var parentNode = parentList.find(function(node){
-				return node.name == parentNodeName;
-			}.bind(this))
+			parentNodeNumber = this.state.selectedNodes[i];
+			var parentNode = parentList[parentNodeNumber];
 			parentList = parentNode.children;
 		}
-		if(parentList == undefined){return}
-		var optionList = parentList.map(function(node) {
-			return (
-				<option value={node.name}>{node.name}</option>
-			);
+		var optionList = parentList.map(function(node, index) {
+			if(this.state.selectedNodes[tier]==index){
+				return(<option value={index} selected>{node.name}</option>)
+			}else{
+				return(<option value={index}>{node.name}</option>);
+			}
+			
 		}.bind(this));
 
 		return optionList;
@@ -92,7 +107,6 @@ class Tabletool extends Component {
 		return (
 		<div class="row pl-md-5 pr-md-5 pt-md-5">
 			{this.showAllDropdowns()}
-			<div>{this.state.selectedNodes.length}</div>
 		</div>
 		);
 	}
