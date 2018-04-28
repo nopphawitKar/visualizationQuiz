@@ -1,0 +1,95 @@
+body {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
+  /*position: relative;*/
+  overflow-y: visible;
+}
+
+.Quiz {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.footer {
+    /*position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #222;
+    color: white;
+    text-align: center;*/
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    background-color: #222;
+    color: white;
+}
+
+/*Plaintext*/
+.Table-cell {
+  background: orange;
+  border: 1px solid black;
+}
+
+.Question-title {
+  text-align: left;
+}
+
+.align-left {
+  text-align: left;
+}
+
+/*indenttree*/
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
+/*.indenttreeGraph{
+  border: 1px solid black;
+}*/
+svg{
+  border: 1px solid black;
+}
