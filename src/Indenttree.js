@@ -16,10 +16,6 @@ class Indenttree extends Component {
 		}
 	 }
 
-	componentDidMount(){
-		  indenttreeGraph.create(this.props.data, ".indenttreeGraph", this.updateByClick.bind(this));
-	}
-
 	updateByClick(node){
 		// var firstNode = null;
 		var userAnswerNodes = [];
@@ -60,7 +56,7 @@ class Indenttree extends Component {
 
 	end(){
 		this.props.recorder("Indenttree time: " + this.state.timeUse)
-		this.props.visible()
+		this.props.updatePage();
 	}
 
 	startTime(){

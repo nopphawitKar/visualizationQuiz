@@ -15,7 +15,8 @@ class Understandability extends Component {
       pVisible: true,
       iTreeVisible: false,
       iTagVisible: false,
-      tToolVisible: false
+      tToolVisible: false,
+      pageNo: 0
     }
   }
 
@@ -43,6 +44,12 @@ class Understandability extends Component {
     })
   }
 
+  updatePageNo(){
+    this.setState({
+      pageNo: ++this.state.pageNo
+    })
+  }
+
   recordUsedTime(time){
     console.log(time)
     this.setState({
@@ -61,12 +68,13 @@ class Understandability extends Component {
 
     return (
       <div className="Understandability">
+
+          {this.state.pageNo==0 && <Plaintext data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)} updatePage={this.updatePageNo.bind(this)}/>}
+          {this.state.pageNo==1 && <Indenttree data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)}  updatePage={this.updatePageNo.bind(this)}/>}
+          {this.state.pageNo==2 && <Indenttag data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)}  updatePage={this.updatePageNo.bind(this)} /> }
         {/*
-          {this.state.pVisible && <Plaintext data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)} visible={this.changePVisible.bind(this)}/>}
-          {this.state.iTreeVisible && <Indenttree data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)}  visible={this.changeITreeVisble.bind(this)}/>}
-          {this.state.iTagVisible && <Indenttag data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)}  visible={this.changeITagVisble.bind(this)} />}
+          <Tabletool data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)}/>
         */}
-        <Tabletool data={understandabilityGraphData} question={understandabilityQuestion} recorder={this.recordUsedTime.bind(this)}/>
           
       </div>
     );

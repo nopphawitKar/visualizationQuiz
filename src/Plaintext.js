@@ -44,7 +44,7 @@ class Plaintext extends Component {
 
 	end(){
 		this.props.recorder("plainText time: " + this.state.timeUse);
-		this.props.visible(false);
+		this.props.updatePage();
 	}
 
 	changeVisualizationState(){

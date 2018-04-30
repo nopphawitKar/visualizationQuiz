@@ -56,7 +56,7 @@ class Indenttag extends Component {
 
 	end(){
 		this.props.recorder("Indenttag time: " + this.state.timeUse)
-		this.props.visible()
+		this.props.updatePage();
 	}
 
 	isCorrectAnswer(userAnswerNodes, currentAnswer){
