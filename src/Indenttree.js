@@ -85,8 +85,11 @@ class Indenttree extends Component {
 						<button type="button" class="btn btn-primary float-left" onClick={() => this.changeVisualizationState()}>Start</button>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-6">
-						<div class="float-right">เวลาที่ใช้ {this.state.timeUse} วินาที</div>
+						<div class="float-right" onClick={() => this.end()}>เวลาที่ใช้ {this.state.timeUse} วินาที</div>
 					</div>
+				</div>
+				<div class="row pl-md-5 pr-md-5 pt-md-5">
+          			 <div class="Question-title col-md-6">{this.state.questionNo + 1}. {this.props.question[this.state.questionNo].text}</div>
 				</div>
 				<div class="row pl-md-5 pr-md-5 pt-md-5">
 					<div class="col-md-6 col-sm-6 col-xs-6">

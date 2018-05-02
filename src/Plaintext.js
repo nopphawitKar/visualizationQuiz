@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Footer from './Footer';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
@@ -96,7 +97,9 @@ class Plaintext extends Component {
 		return <div value={"text"}>{"text"}</div>;
 	}
 
-	
+	renderFooter(){
+		return <Footer></Footer>;
+	}
 
 	render() {
 		
@@ -108,7 +111,7 @@ class Plaintext extends Component {
 						<button type="button" class="btn btn-primary float-left" onClick={() => this.changeVisualizationState()}>Start</button>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-6">
-						<div class="float-right">เวลาที่ใช้ {this.state.timeUse} วินาที</div>
+						<div class="float-right" onClick={() => this.end()}>เวลาที่ใช้ {this.state.timeUse} วินาที</div>
 					</div>
 				</div>
 				<div class="row pl-md-5 pr-md-5 pt-md-5">
@@ -117,6 +120,7 @@ class Plaintext extends Component {
 				<div className="Plaintext" class="row pl-md-5 pr-md-5 pt-md-5">
 					{this.state.visible && this.renderPlaintext()}
 				</div>
+
 			</div>
 		);
 	}
