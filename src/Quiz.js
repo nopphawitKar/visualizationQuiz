@@ -1,52 +1,67 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Stepper from 'react-stepper-horizontal';
 import Learnability from './Learnability';
 import Understandability from './Understandability';
 import Footer from './Footer';
+
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/bootstrap-directional-buttons/dist/bootstrap-directional-buttons.css';
 
 class Quiz extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      uScores : ["plainText time: -","indent tree time: -","indent tag time: -","table tool time: -"],
-      lScores : ["plainText time: -","indent tree time: -","indent tag time: -","table tool time: -"]
+      steps: [{
+        title: 'Learnability 1 : plain text'
+      }, {
+        title: 'Learnability 2 : indent tree'
+      }, {
+        title: 'Learnability 3 : indent tag'
+      }, {
+        title: 'Learnability 4 : table tool'
+      },{
+        title: 'Learnability 1 : plain text'
+      }, {
+        title: 'Learnability 2 : indent tree'
+      }, {
+        title: 'Learnability 3 : indent tag'
+      }, {
+        title: 'Learnability 4 : table tool'
+      }],
+      currentStep : 0,
+      graphTypeCount : 4,
+      currentQuizGroup : 0,
+      scores : []
     }
   }
 
-  setUScores(scores){
-    var newUScore = scores;
-    if(scores.length < 4){
-      var unscorePart = this.state.uScores.slice(scores.length)
-      newUScore = scores.concat(unscorePart)
-    }
+  updateScores(score){
+    var newScore = [score];
     this.setState({
-      uScores : newUScore
+      scores : this.state.scores.concat(newScore),
+      currentStep : ++this.state.currentStep
     })
-    console.log(scores)
+    if(this.state.currentStep == this.state.graphTypeCount){
+      this.setState({
+        currentQuizGroup : ++this.state.currentQuizGroup
+      })
+    }
   }
 
-  renderScores(){
-    var scoresList = this.state.uScores.map(function(score) {
-      return (
-        <button type="button" class="btn btn-primary col-md-3">{score}</button>
-      );
-    }.bind(this));
-
-    return scoresList;
-  }
 
   render() {
     return (
       <div className="Quiz">
         <div class="row pl-md-5 pr-md-5">
-          {this.renderScores()}
+          <Stepper steps={this.state.steps} activeStep={this.state.currentStep} />
         </div>
         <div class="row pl-md-5 pr-md-5 pt-md-5">
-          <div class="col-md-6 Question-title">จงเลือกกฎความสัมพันธ์ตามโจทย์ที่กำหนดให้</div>
+          <div class="col-md-6 Question-title" >จงเลือกกฎความสัมพันธ์ตามโจทย์ที่กำหนดให้</div>
         </div>
-        <Understandability setScores={this.setUScores.bind(this)}/>
-        {/*<Learnability/>*/}
+        {this.state.currentQuizGroup==0 && <Understandability setScores={this.updateScores.bind(this)}/>}
+        {this.state.currentQuizGroup==1 && <Learnability setScores={this.updateScores.bind(this)}/>}
       </div>
     );
   }
